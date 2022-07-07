@@ -1,0 +1,71 @@
+<h1 mat-dialog-title>Patient Details- {{data.id}} </h1>
+<div mat-dialog-content>
+    <mat-tab-group>
+        <mat-tab label="SABA L3Y">
+
+            <ul>
+                Date, Medication and Name -- Total Values: {{ broncho.length}}
+                <li *ngFor="let b of broncho">
+                    <span>{{b.date}}</span>
+                    <span>{{b.medication}}</span>
+                    <span>{{b.name}}</span>
+                </li>
+            </ul>
+
+        </mat-tab>
+        <mat-tab label="ICS L3Y">
+
+            <ul>
+                Date, Medication and Name -- Total Values: {{ ics.length}}
+                <li *ngFor="let b of ics">
+                    <span>{{b.date}}</span>
+                    <span>{{b.medication}}</span>
+                    <span>{{b.name}}</span>
+                </li>
+            </ul>
+        </mat-tab>
+        <mat-tab label="Asthma Diagnostics Code L3Y">
+            <ul>
+                Date, and Term -- Total Values: {{ adc.length}}
+                <li *ngFor="let b of adc">
+                    <span>{{b.date}}</span>
+                    <span>{{b.term}}</span>
+                </li>
+            </ul>
+        </mat-tab>
+        <mat-tab label="Respiratory Symptoms Codes L3Y">
+            <ul>
+                Date, and Term -- Total Values: {{ rsc.length}}
+                <li *ngFor="let b of rsc">
+                    <span>{{b.date}}</span>
+                    <span>{{b.term}}</span>
+                </li>
+            </ul>
+        </mat-tab>
+        <mat-tab label="ACT Code">
+
+            <ul>
+                Date, Term and Value -- Total Values: {{ act.length}}
+                <li *ngFor="let b of act">
+                    <span>{{b.date}}</span>
+                    <span>{{b.term}}</span>
+                    <span>{{b.value}}</span>
+                </li>
+            </ul>
+        </mat-tab>
+        <mat-tab label="Asthma Review Code">
+            <ul>
+                Date, Term and Value -- Total Values: {{ arc.length}}
+                <li *ngFor="let b of arc">
+                    <span>{{b.date}}</span>
+                    <span>{{b.term}}</span>
+                </li>
+            </ul>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Close</button>
+
+</div>

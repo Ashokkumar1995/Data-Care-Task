@@ -1,6 +1,20 @@
 $primary: #1976d2;
 $white: white;
 
+::ng-deep .containerPanel {
+  width: 100% !important;
+}
+::ng-deep .mat-dialog-container {
+  background-color: $primary;
+  color: $white;
+
+  ul li {
+    margin: 4px 0;
+    span {
+      margin: 0 4px;
+    }
+  }
+}
 .content {
   .mat-card {
     background: $primary;
@@ -17,5 +31,23 @@ $white: white;
   .uploadBtn {
     background-color: $white;
     color: $primary;
+  }
+
+  .tableContainer {
+    display: flex;
+    flex: 1 1 0px;
+    width: 100%;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+
+    table {
+      background-color: $primary;
+      width: 100%;
+      .viewDetailsBtn {
+        background-color: white;
+        color: $primary;
+      }
+    }
   }
 }

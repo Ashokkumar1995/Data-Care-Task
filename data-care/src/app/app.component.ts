@@ -1,4 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { DialogOverviewExampleDialog } from './dialog/dialog.component';
 
 export class MedicationBase {
   date: string = '';
@@ -101,7 +108,25 @@ export class AppComponent {
   title = 'data-care';
   file: any;
   public records: any[] = [];
+  showTable = false;
   @ViewChild('csvReader') csvReader: any;
+  displayedColumns: string[] = ['id', 'age', 'gender', 'subData'];
+  dataSource: PatientRecord[] = [];
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog(id: string): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: { id: id, data: this.dataSource },
+      panelClass: 'containerPanel',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
 
   public upload(event: any): void {
     this.file = event.target.files[0];
@@ -125,9 +150,9 @@ export class AppComponent {
       reader.onload = () => {
         let csvData = reader.result;
         let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);
-        console.log(csvRecordsArray);
+        // console.log(csvRecordsArray);
         let headersRow = this.getHeaderArray(csvRecordsArray);
-        console.log(headersRow);
+        // console.log(headersRow);
         this.records = this.getData(csvRecordsArray, headersRow.length);
       };
 
@@ -225,33 +250,16 @@ export class AppComponent {
     for (let i = startingIndex; i < csvRecordsArray.length; i++) {
       let currentRecord = (<string>csvRecordsArray[i]).split(',');
       if (currentRecord[0] !== '' && i != 12) {
-        console.log(i, j);
+        // console.log(i, j);
         let p = this.getSubRecords(j, i, csvRecordsArray);
         patients.push(p);
         j = i;
       }
     }
-    // console.log(patients);
-    // while (true) {
-    //   if (startingIndex == csvRecordsArray.length) {
-    //     break;
-    //   }
-    //   console.log('INside While' + startingIndex);
-    //   let p = new PatientRecord();
-    //   let currentRecord = (<string>csvRecordsArray[startingIndex]).split(',');
-
-    //   p.id = currentRecord[0];
-    //   p.age = currentRecord[1];
-    //   p.gender = currentRecord[2];
-    //   let sub = this.getSubData(startingIndex, csvRecordsArray);
-    //   p.subData = sub;
-
-    //   startingIndex += sub.actCode.length;
-    //   patients.push(p);
-    // }
 
     console.log(patients);
-
+    this.dataSource = patients;
+    this.showTable = true;
     // let p = new PatientRecord();
     // for (let i = 12; i < csvRecordsArray.length; i++) {
 
